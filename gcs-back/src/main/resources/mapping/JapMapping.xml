@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gcsoft.gcs.webapp.language.mapper.JapMapper">
+
+    <resultMap id="BaseResultMap" type="com.gcsoft.gcs.webapp.entity.Jap">
+        <result column="ID" jdbcType="INTEGER" property="id" />
+        <result column="KANJI" jdbcType="VARCHAR" property="kanji" />
+        <result column="HIRAGANA" jdbcType="VARCHAR" property="hiragana" />
+        <result column="CHINESE" jdbcType="VARCHAR" property="chinese" />
+        <result column="NOUN" jdbcType="BOOLEAN" property="noun" />
+        <result column="ADJ1" jdbcType="BOOLEAN" property="adj1" />
+        <result column="ADJ2" jdbcType="BOOLEAN" property="adj2" />
+        <result column="VERB1" jdbcType="BOOLEAN" property="verb1" />
+        <result column="VERB2" jdbcType="BOOLEAN" property="verb2" />
+        <result column="VERB3" jdbcType="BOOLEAN" property="verb3" />
+        <result column="ADVERB" jdbcType="BOOLEAN" property="adverb" />
+        <result column="SAMPLE" jdbcType="VARCHAR" property="sample" />
+    </resultMap>
+
+    <select id="sel" resultType="com.gcsoft.gcs.webapp.entity.Jap" parameterType="int">
+        select * from JAP where ID = #{id}
+    </select>
+
+    <select id="selKanji" resultType="com.gcsoft.gcs.webapp.entity.Jap" parameterType="String">
+        select * from JAP where KANJI = #{kanji}
+    </select>
+
+    <select id="cot" resultType="int">
+        select count(*) from JAP
+    </select>
+
+    <insert id="ins" parameterType="com.gcsoft.gcs.webapp.entity.Jap" statementType="PREPARED" timeout="20000">
+        insert into JAP (KANJI, HIRAGANA, CHINESE, NOUN, ADJ1, ADJ2, VERB1, VERB2, VERB3, ADVERB, SAMPLE)
+        values (#{kanji},#{hiragana},#{chinese},#{noun},#{adj1},#{adj2},#{verb1},#{verb2},#{verb3},#{adverb},#{sample})
+    </insert>
+    <update id="upt" parameterType="com.gcsoft.gcs.webapp.entity.Jap" statementType="PREPARED" timeout="20000">
+        update JAP set HIRAGANA = #{hiragana}, CHINESE = #{chinese},NOUN = #{noun}, ADJ1 = #{adj1}, ADJ2 = #{adj2}, VERB1 = #{verb1}, VERB2 = #{verb2}, VERB3 = #{verb3}, ADVERB = #{adverb}, SAMPLE = #{sample} where ID = #{id}
+    </update>
+</mapper>
